@@ -1,19 +1,24 @@
 # Maven Toys Profitability & Expansion Analysis
 
+Maven Toys is planning to expand. This analysis identifies exactly where.
+
+---
+
 ## Project Background
+
 Maven Toys is a fictitious toy store chain operating across Mexico, looking to expand with new store openings. As an external BI consultant, this analysis examines transaction, product, and store data across 50 locations to identify which categories, cities, and store profiles drive the most profit, and to provide data-driven recommendations on where and how Maven Toys should expand.
 
 Insights and recommendations are provided on the following key areas:
 
-* **Product Performance:** Analysis of revenue and profit margin across product categories to identify which products drive the most value and whether this is consistent across locations.
-* **Store & Regional Performance:** Evaluation of store-level revenue and profitability across cities and location types to surface the highest-performing store profiles.
-* **Seasonal Trends:** Identification of demand patterns across the year to inform inventory planning and new store launch timing.
-* **Store Cohort Analysis:** Analysis of stores grouped by opening date to compare how different eras of expansion have performed and which profiles are most efficient on a per-store basis.
-* **Expansion Recommendation:** A data-driven recommendation on which store profile Maven Toys should prioritise when opening new locations.
-
-An interactive Tableau dashboard can be viewed [here](https://public.tableau.com/shared/MXSQGZFXC?:display_count=n&:origin=viz_share_link).
+- **Product Performance:** Analysis of revenue and profit margin across product categories to identify which products drive the most value and whether this is consistent across locations
+- **Store & Regional Performance:** Evaluation of store-level revenue and profitability across cities and location types to surface the highest-performing store profiles
+- **Seasonal Trends:** Identification of demand patterns across the year to inform inventory planning and new store launch timing
+- **Store Cohort Analysis:** Analysis of stores grouped by opening date to compare how different eras of expansion have performed and which profiles are most efficient on a per-store basis
+- **Expansion Recommendation:** A data-driven recommendation on which store profile Maven Toys should prioritise when opening new locations
 
 The Python notebook used for data cleaning, EDA, profitability analysis, SQL queries, and cohort analysis can be found [here](maven_toys_analysis.ipynb).
+
+An interactive Tableau dashboard can be viewed [here](https://public.tableau.com/shared/MXSQGZFXC?:display_count=n&:origin=viz_share_link).
 
 ---
 
@@ -21,7 +26,7 @@ The Python notebook used for data cleaning, EDA, profitability analysis, SQL que
 
 Maven Toys' database contains 4 tables covering products, stores, daily sales transactions, and current inventory levels.
 
-![ERD Diagram](maventoys_erd.png)
+<img src="maventoys_erd.png" width="650">
 
 | Table | Description | Rows |
 |---|---|---|
@@ -36,42 +41,41 @@ The dataset spans **1 January 2022 to 30 September 2023** across 50 stores and 3
 
 ## Executive Summary
 
-### The Business Problem
-Maven Toys is planning to open new store locations and needs to understand which markets and store profiles are worth replicating. This analysis covers 829,262 sales transactions across 50 stores to identify the highest-value expansion opportunities by location type, city, and product mix.
-
 ### Methodology
 Sales and product data were joined to calculate revenue (unit price × units sold) and profit (revenue minus cost) in USD ($). Margin % was calculated at the product level. Stores were grouped into cohorts by opening date to compare per-store efficiency across different eras of expansion. All figures use total values unless otherwise noted; per-store averages are used for cohort comparisons to control for group size.
+
+### Overview of Findings
+
+Across 829,262 transactions spanning 50 stores and 35 products, Airport locations and Electronics emerge as the two clearest drivers of profitability. Airport stores average $126,016 profit per store — 63% more than any other location type — yet only 3 exist in the current portfolio, making them the most underleveraged opportunity. Electronics delivers a 46% margin, nearly double the portfolio average of 28%, while December consistently spikes 45% above the annual low, pointing to a clear window for new store launches.
 
 Below is the overview page from the Tableau dashboard. The full interactive dashboard can be viewed [here](https://public.tableau.com/shared/MXSQGZFXC?:display_count=n&:origin=viz_share_link).
 
 ![Dashboard](maventoys_dash.png)
 
----
-
-## Key Findings
+### Key Metrics
 
 | Metric | Value |
 |---|---|
-| Total Revenue ($) | 16,444,572 |
-| Total Profit ($) | 4,014,049 |
+| Total Revenue | $16,444,572 |
+| Total Profit | $4,014,049 |
 | Overall Margin % | 28% |
 | Highest Margin Category | Electronics (46%) |
-| Highest Avg Profit per Store ($) | Airport (126,016) |
+| Highest Avg Profit per Store | Airport ($126,016) |
 | Peak Revenue Month | December |
 | Strongest City | Ciudad de Mexico |
 
+### Sales Trends
+
 - **Electronics** delivers nearly as much total profit as Toys despite selling less than half the units, making it the highest-margin category at 46%
-- **Airport stores** average $126,016 profit per store, which is 63% more than Downtown, Commercial, or Residential locations (all within 1% of each other)
-- **Ciudad de Mexico** accounts for 3 of the top 10 stores by profit despite having only 7 stores in the portfolio, reflecting a strong concentration of high-performing locations; Guadalajara and Monterrey follow closely
+- **Airport stores** average $126,016 profit per store — 63% more than Downtown, Commercial, or Residential locations, which all perform within 1% of each other
+- **Ciudad de Mexico** accounts for 3 of the top 10 stores by profit despite having only 7 stores in the portfolio; Guadalajara and Monterrey follow closely
 - **December is the peak month** across both years, with revenue spiking roughly 45% above the August low driven by Christmas demand
-- **2023 outperforms 2022 in every single month** (January through September, the extent of available 2023 data), indicating the business is growing year over year across all store types and categories
-- The **2000-2004 store cohort** generates the highest average profit per store at $88,489, outperforming newer cohorts on a per-store basis and likely reflecting the prime site selection decisions made during Maven Toys' earliest expansion phase
+- **2023 outperforms 2022 in every single month** (January through September), indicating year-over-year growth across all store types and categories
+- The **2000–2004 store cohort** generates the highest average profit per store at $88,489, outperforming newer cohorts and likely reflecting prime site selection during Maven Toys' earliest expansion phase
 
 <img src="cohort.png" width="650">
 
----
-
-## Recommendations
+### Recommendations
 
 Each recommendation is directed at informing Maven Toys' expansion strategy.
 
@@ -90,10 +94,19 @@ Each recommendation is directed at informing Maven Toys' expansion strategy.
 - New stores opened by October will have time to establish operations before the Christmas demand spike
 - Ensure Electronics and Toys inventory is fully stocked entering November
 
-#### Use the 2000-2004 Cohort as a Benchmarking Model
-- Despite being the oldest active stores, the 2000-2004 cohort generates the highest avg profit per store at $88,489
-- The location decisions made during that period have proven most durable, and new site selection should study what those stores have in common (city, location type, footprint)
+#### Use the 2000–2004 Cohort as a Benchmarking Model
+- Despite being the oldest active stores, the 2000–2004 cohort generates the highest avg profit per store at $88,489
+- New site selection should study what those stores have in common (city, location type, footprint)
 - Avoid assuming newer stores will outperform; the data shows no correlation between store age and per-store efficiency
+
+---
+
+## Assumptions & Caveats
+
+- **Revenue and profit are derived fields** — not present in the raw data; calculated as unit price × units sold and revenue minus cost respectively
+- **2023 data is partial** — the dataset runs only through September 2023, so full-year 2023 comparisons are not possible; year-over-year comparisons are limited to January–September
+- **Inventory data reflects a snapshot** — current stock levels represent a point-in-time view and are not used in profitability calculations
+- **All figures are in USD ($)** — original data is in Mexican pesos; conversion assumed at a fixed rate for consistency
 
 ---
 
